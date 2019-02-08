@@ -1,7 +1,56 @@
+
+// task sourcesJar(type: Jar) {
+//     from sourceSets.main.allJava
+//     archiveClassifier = 'sources'
+// }
+
+// task javadocJar(type: Jar) {
+//     from javadoc
+//     archiveClassifier = 'javadoc'
+// }
+def noJavaDoc = name.endsWith('tests') || name.contains('testlanguage')
+publishing {
+    publications {
+ LocalMavenRepo(MavenPublication) {
+            from components.java
+             artifact sourcesJar
+             if (!noJavaDoc) {
+            	artifact javadocJar
+        	}
+        pom {
+        	url = 'https://www.eclipse.org/Xtext/'
+		licenses {
+			license {
+				name = 'Eclipse Public License, Version 1.0'
+				url = 'http://www.eclipse.org/legal/epl-v10.html'
+			}
+		}
+		scm {
+			connection = "scm:git:git@github.com:eclipse/${rootProject.name}.git"
+			developerConnection = "scm:git:git@github.com:eclipse/${rootProject.name}.git"
+			url = "git@github.com:eclipse/${rootProject.name}.git"
+		}
+        }
+        apply from: "${rootDir}/gradle/developers.gradle", to: pom
+
+    	}
+       
+    }
+    repositories {
+        maven {
+            // change to point to your repo, e.g. http://my.org/repo
+            url = "$rootProject.buildDir/maven-repository"
+        }
+    }
+}
+
+
+
+
 /*
  * Configuration of deployment to Maven repositories.
  */
-
+/*
 // Configuration function for generated POMs
 def configurePom = { pom ->
 	pom.project {
@@ -10,18 +59,7 @@ def configurePom = { pom ->
 			description = project.description
 		}
 		packaging 'jar'
-		url 'https://www.eclipse.org/Xtext/'
-		licenses {
-			license {
-				name 'Eclipse Public License, Version 1.0'
-				url 'http://www.eclipse.org/legal/epl-v10.html'
-			}
-		}
-		scm {
-			connection "scm:git:git@github.com:eclipse/${rootProject.name}.git"
-			developerConnection "scm:git:git@github.com:eclipse/${rootProject.name}.git"
-			url "git@github.com:eclipse/${rootProject.name}.git"
-		}
+		
 	}
 	apply from: "${rootDir}/gradle/developers.gradle", to: pom
 }
@@ -41,3 +79,4 @@ afterEvaluate {
 	}
 	
 }
+*/

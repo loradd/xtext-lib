@@ -2,7 +2,7 @@
  * Information on Xtext developers used in generated pom files for Maven publishing.
  */
 
-project {
+
 	developers {
 		developer {
 			name = 'Sven Efftinge'
@@ -106,4 +106,4 @@ project {
 			organizationUrl = 'https://www.sigasi.com'
 		}
 	}
-}
+

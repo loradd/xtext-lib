@@ -76,7 +76,7 @@ spec:
       steps {
         dir('.m2/repository/org/eclipse/xtext') { deleteDir() }
         dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
-        sh './1-install-bom.sh'
+        // sh './1-install-bom.sh'
       }
     }
 

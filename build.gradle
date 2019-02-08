@@ -31,26 +31,34 @@ subprojects {
 		// https://github.com/eclipse/xtext/issues/1388
 		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
-	
-	apply plugin: 'java'
-	apply plugin: 'io.spring.dependency-management'
-	dependencyManagement {
-		imports {
-			mavenBom "org.eclipse.xtext:xtext-dev-bom:$project.version"
+	apply plugin: 'maven-publish'
+
+	if (name != 'org.eclipse.xtext.dev-bom') {
+		apply plugin: 'java'
+		// apply plugin: 'io.spring.dependency-management'
+		// dependencyManagement {
+		// 	imports {
+		// 		mavenBom "org.eclipse.xtext:xtext-dev-bom:$project.version"
+		// 	}
+		//}
+		dependencies {
+			compile platform(project(':org.eclipse.xtext.dev-bom'))
 		}
+		if (findProperty('compileXtend') == 'true') {
+			apply plugin: 'org.xtext.xtend'
+		}
+		apply plugin: 'eclipse'
+		
+		
+		apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
+		apply from: "${rootDir}/gradle/xtend-compiler-settings.gradle"
+		apply from: "${rootDir}/gradle/maven-deployment.gradle"
+		apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
+		apply from: "${rootDir}/gradle/manifest-gen.gradle"
+		apply from: "${rootDir}/gradle/validation.gradle"
 	}
-	if (findProperty('compileXtend') == 'true') {
-		apply plugin: 'org.xtext.xtend'
-	}
-	apply plugin: 'eclipse'
-	apply plugin: 'maven'
 	
-	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
-	apply from: "${rootDir}/gradle/xtend-compiler-settings.gradle"
-	apply from: "${rootDir}/gradle/maven-deployment.gradle"
-	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
-	apply from: "${rootDir}/gradle/manifest-gen.gradle"
-	apply from: "${rootDir}/gradle/validation.gradle"
+	
 }
 
 task clean(type: Delete) {
