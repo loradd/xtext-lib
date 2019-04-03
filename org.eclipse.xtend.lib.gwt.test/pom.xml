@@ -40,14 +40,11 @@
 	</dependencies>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-<<<<<<< Upstream, based on origin/master
 		<resources>
 			<resource>
 				<directory>resources</directory>
 			</resource>
 		</resources>
-=======
->>>>>>> 580c960 Monobuild of xtext-lib.
 		<plugins>
 			<plugin>
 				<groupId>net.ltgt.gwt.maven</groupId>
