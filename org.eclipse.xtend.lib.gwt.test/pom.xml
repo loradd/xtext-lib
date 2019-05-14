@@ -53,7 +53,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<moduleName>org.eclipse.xtend.lib.test.Test</moduleName>
- <!--  					<superSourceDirectory>../org.eclipse.xtext.xbase.lib.gwt/src-super</superSourceDirectory> -->
+  					<superSourceDirectory>../org.eclipse.xtext.xbase.lib.gwt/build/gwtSources</superSourceDirectory>
 					<generateInheritsFromDependencies>true</generateInheritsFromDependencies>
 					<compilerArgs>
 						<compilerArg>-strict</compilerArg>
